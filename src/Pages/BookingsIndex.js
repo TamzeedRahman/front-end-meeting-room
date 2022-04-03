@@ -16,9 +16,10 @@ function BookingsIndex() {
     });
   }, []);
 
-
-  return (
+  return (<>
+  <h1>Bookings</h1>
     <div className="container">
+      <p>Here are all the scheduled Bookings. Click on the meeting name to view more details. </p>
       <div className="row mt-3">
         <div className="row mt-3">
           <div className="col-sm">
@@ -27,6 +28,7 @@ function BookingsIndex() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

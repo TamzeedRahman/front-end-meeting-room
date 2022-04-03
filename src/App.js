@@ -15,6 +15,7 @@ import Index from "./Pages/Index";
 import BookingsIndex from "./Pages/BookingsIndex";
 import New from "./Pages/New";
 import Show from "./Pages/Show";
+import RoomBookings from "./Pages/RoomBookings";
 import ShowBooking from "./Pages/ShowBooking";
 
 const API_BASE = apiURL();
@@ -65,11 +66,23 @@ function App() {
   useEffect(() => {
     deleteMeetingRoom();
   }, []);
+
     
 //_____________________________________________________
-  const fetchBookingData = async () => {
+const fetchRoomBookingData = async (id) => {
+  await axios.get(`${API_BASE}/meetingRooms/${id}/bookings`).then((response) => {
+    setBooking(response.data.payload);
+  });
+ 
+};
+
+useEffect(() => {
+  fetchRoomBookingData();
+}, []);
+
+const fetchBookingData = async () => {
     await axios.get(`${API_BASE}/bookings`).then((response) => {
-      setRoom(response.data.payload);
+      setBooking(response.data.payload);
     });
    
   };
@@ -78,12 +91,13 @@ function App() {
     fetchBookingData();
   }, []);
 
+ 
+
   const addBooking = (newBooking) => {
   axios 
   .post (`${API_BASE}/bookings`, newBooking)
   .then((response) =>{
     setBooking([...bookings, newBooking])
-    
   } ).catch((e) => {
     console.log(e)
   })
@@ -110,27 +124,6 @@ function App() {
     deleteBooking();
   }, []);
 
-  const fetchBookingByMeetingRoomId = (meeting_room_id) => {
-    axios
-      .get(`${API_BASE}/meetingRooms/${meeting_room_id}/bookings`)
-      .then(
-        (response) => {
-          const bookingsResult = bookings.filter(booking => booking.meeting_room_id == Number(meeting_room_id)
-      
-          );
-          setBooking(bookingsResult);
-          //console.log(`Result:${typeof(bookingsResult)}`);
-          // history.push("/bookings");
-        } ).catch((c) => {
-        console.warn("catch", c);
-      })
-  }
-
-  useEffect(() => {
-    fetchBookingByMeetingRoomId();
-  }, []);
-
-
   return (
     <div className="App">
       <Router>
@@ -147,13 +140,16 @@ function App() {
                 {" "}
                 <New addRoom={addRoom} />{" "}
               </Route>
-
+              <Route path="/meetingRooms/:id/bookings">
+                {" "}
+                <RoomBookings bookings={bookings}/>{" "}
+              </Route>
              
               <Route path="/meetingRooms/:id">
                 {" "}
                 <Show
                   rooms={rooms} addBooking={addBooking} deleteMeetingRoom={deleteMeetingRoom}
-                  fetchBookingByMeetingRoomId={fetchBookingByMeetingRoomId}
+                  bookings={bookings} fetchBookings={fetchRoomBookingData }
                 />{" "}
               </Route>
               <Route path="/meetingRooms">
@@ -179,6 +175,19 @@ function App() {
           </main>
         </div>
       </Router>
+
+
+      <div className="container-flex-fill">
+  <footer  className=" bg-light d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+
+      
+    <p className="col-md-4 mb-0 text-muted">&copy; 2022 BXTI Meeting Room Booking</p>
+
+    <p className="col-md-4 mb-0 text-muted">Made with React and Bootstrap <div> </div> By Tamzeed Rahman</p>
+    
+  </footer>
+  
+</div>    
     </div>
   );
 }

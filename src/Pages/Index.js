@@ -19,8 +19,12 @@ function Index() {
 
   
 
-  return (
+  return (<>
+
+   <h1>Meeting Rooms</h1>
+
     <div className="container">
+       <p>Here are all the available Meeting Rooms. Click on the room name to view more details. </p>
       <div className="row mt-3">
         <div className="row mt-3">
           <div className="col-sm">
@@ -29,6 +33,7 @@ function Index() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

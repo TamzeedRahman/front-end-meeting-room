@@ -5,6 +5,7 @@ import { withRouter, useHistory } from "react-router-dom";
 function BookingNewForm(props) {
   let history = useHistory()
   const [booking, setBooking] = useState({
+    meeting_room_id: "",
     meeting_name: "",
     time_start: "",
     time_end: "",
@@ -71,7 +72,7 @@ function BookingNewForm(props) {
           </div>
           <div className="col-lg col-lg-12">
             <div className="row mt-3">
-              <div className="col-sm">
+              <div className="col-mt-3 mr-1">
                 <input type="submit" className="btn btn-primary" />
               </div>
             </div>

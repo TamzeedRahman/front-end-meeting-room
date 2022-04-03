@@ -60,13 +60,7 @@ function BookingDetails(props) {
               <Link to={`/bookings`}>
                 <button className="btn btn-primary">Back</button>
               </Link>
-            </div>
-          </div>
-        </div>
-        <div>
-          {" "}
-          <div className="row mt-3">
-            <div className="col-sm">
+              {"  "}
               <button onClick={handleDelete} className="btn btn-primary">
                 Delete
               </button>

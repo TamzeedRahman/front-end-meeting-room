@@ -9,6 +9,7 @@ function ShowBooking({ bookings, deleteBooking }) {
   return (
     <div className="ShowBooking">
       <h2 className="mt-3">Booking Details</h2>
+      <p>Here are the booking details. Click Delete to remove a scheduled booking. </p>
       <section>
         <BookingDetails
           booking={booking}

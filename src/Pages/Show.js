@@ -1,26 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RoomDetails from "../Components/RoomDetails";
 import React from 'react';
-import Bookings from "../Components/Bookings";
 import BookingNewForm from "../Components/BookingNewForm";
-import BookingDetails from "../Components/BookingDetails";
 import uuid from "react-uuid";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { apiURL } from "../util/apiURL";
 
-function Show({ rooms, addBooking, deleteMeetingRoom, 
-  fetchBookingByMeetingRoomId}) {
+const API_BASE = apiURL();
+
+function Show({ rooms, addBooking, deleteMeetingRoom, bookings, fetchBookings}) {
   let { id } = useParams();
   const [room] = useState(rooms[id]);
+  const [booking, setBooking] = useState([]);
+
+  const handleFetchBookings = () => {
+    fetchBookings(id);
+  };
 
   return (
     <div className="Show">
       <h2 className="mt-3">Room Details</h2>
+      <p>Click Current Bookings to view scheduled bookings for this meeting room.</p>
+      <p>To schedule a new booking, fill out the information and hit Submit.</p>
       <section>
         <RoomDetails
           room={room}
           id={id}
           deleteMeetingRoom={deleteMeetingRoom}
         />
+        <div >
+        <button onClick={handleFetchBookings} className="btn btn-primary m-3 " >  
+        <Link to={`/meetingRooms/${id}/bookings`} className="link-light">
+            Current Bookings
+          </Link>
+        </button>
+        </div>
       </section>
 
 
@@ -29,32 +45,8 @@ function Show({ rooms, addBooking, deleteMeetingRoom,
       <BookingNewForm addBooking={addBooking} />
     </div>
 
-    <tbody>
-        <Bookings bookings={fetchBookingByMeetingRoomId(id)}/>
-    </tbody>
-
     
-    {/* <table className="table">
-        <thead>
-          <tr>
-          
-            <th scope="col">Meeting Name</th>
-            <th scope="col">Start</th>
-            <th scope="col">End</th>
-            <th scope="col">Attendees</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">{booking.meeting_name}</th>
-            <td>{booking.time_start}</td>
-            <td>{booking.time_end}</td>
-            <td>{booking.attendees}</td>
-          </tr>
-        </tbody>
-      </table> */}
-
+  
     </div>
 
 

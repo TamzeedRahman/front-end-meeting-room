@@ -43,11 +43,11 @@ function RoomDetails(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          
             <th scope="row">{room.room_name}</th>
             <td>{room.building_level}</td>
             <td>{room.capacity}</td>
-          </tr>
+         
         </tbody>
       </table>
 
@@ -60,19 +60,18 @@ function RoomDetails(props) {
           {" "}
           <div className="row mt-3">
             <div className="col-sm">
-              <Link to={`/meetingRooms`}>
-                <button className="btn btn-primary">Back</button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="row mt-3">
-            <div className="col-sm">
+          
               <button onClick={handleDelete} className="btn btn-primary">
                 Delete
               </button>
+              {" "}
+              <Link to={`/meetingRooms`}>
+                <button className="btn btn-primary">Back</button>
+              </Link>
+              
             </div>
           </div>
+        </div>
       </div>
     </div>
   );

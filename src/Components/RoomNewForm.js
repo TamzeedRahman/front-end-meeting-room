@@ -27,8 +27,9 @@ const handleCancel = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="row">
-        <div className="col-md col-lg-3">
+      
+            <div className="row mt-3">
+              <div className="col-sm">
             <label htmlFor="room_name">Room Name:</label>
             <input
               id="room_name"
@@ -65,7 +66,8 @@ const handleCancel = () => {
             <div className="row mt-3">
               <div className="col-sm">
               <input type="submit" className="btn btn-primary" />
-              <input type="button" onClick={handleCancel} value="cancel" className="btn btn-primary" />
+              {" "}
+              <input type="button" onClick={handleCancel} value="Cancel" className="btn btn-primary" />
               </div>
             </div>
           </div>

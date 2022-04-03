@@ -1,16 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import Booking from "./Booking";
+import Booking from "../Components/Booking";
 import uuid from "react-uuid";
-import axios from "axios";
 
-import { apiURL } from "../util/apiURL";
-import { withRouter } from "react-router-dom";
+function RoomBookings({bookings}) {
 
-const API_BASE = apiURL();
-
-function Bookings({bookings}) {
-
+  console.log(`bookings: ${bookings}`);
   return (
     <div className="">
       <section>
@@ -24,7 +18,7 @@ function Bookings({bookings}) {
             </tr>
           </thead>
           <tbody>
-              {bookings && bookings.map((booking) => {
+              {bookings && Object.values(bookings).map((booking) => {
                 return (
                   <Booking key={uuid()} booking={booking} />
                 );
@@ -35,4 +29,4 @@ function Bookings({bookings}) {
     </div>
   );
 }
-export default Bookings;
+export default RoomBookings;
