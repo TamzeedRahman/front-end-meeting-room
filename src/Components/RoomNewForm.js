@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { withRouter } from "react-router-dom";
+import {  withRouter, useHistory} from "react-router-dom";
 
-function RoomNewForm(props) {
+function RoomNewForm(props) { 
+  let history = useHistory()
   const [room, setRoom] = useState({
-    name: "",
-    floor: "",
+    room_name: "",
+    building_level: "",
     capacity: "",
 
   });
@@ -19,16 +20,19 @@ function RoomNewForm(props) {
     props.addRoom(room);
     props.history.push("/meetingRooms");
   };
+const handleCancel = () => {
+  history.push("/meetingRooms")
+}
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="row">
         <div className="col-md col-lg-3">
-            <label htmlFor="name">Room Name:</label>
+            <label htmlFor="room_name">Room Name:</label>
             <input
-              id="name"
-              value={room.name}
+              id="room_name"
+              value={room.room_name}
               type="text"
               className="form-control"
               onChange={handleTextChange}
@@ -36,10 +40,10 @@ function RoomNewForm(props) {
             />
           </div>  
           <div className="col-sm col-lg-3">
-            <label htmlFor="floor">Floor:</label>
+            <label htmlFor="building_level">Floor:</label>
             <input
-              id="floor"
-              value={room.floor}
+              id="building_level"
+              value={room.building_level}
               type="text"
               className="form-control"
               onChange={handleTextChange}
@@ -60,7 +64,8 @@ function RoomNewForm(props) {
           <div className="col-lg col-lg-12">
             <div className="row mt-3">
               <div className="col-sm">
-                <input type="submit" className="btn btn-primary" />
+              <input type="submit" className="btn btn-primary" />
+              <input type="button" onClick={handleCancel} value="cancel" className="btn btn-primary" />
               </div>
             </div>
           </div>

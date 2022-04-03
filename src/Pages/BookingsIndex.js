@@ -8,14 +8,13 @@ import { useState, useEffect } from "react";
 const API_BASE = apiURL();
 
 function BookingsIndex() {
-  const [bookings, setBooking] = useState("");
+  const [bookings, setBooking] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_BASE}/booking`).then((response) => {
-      const { data } = response;
-      setBooking(String(data.booking));
+    axios.get(`${API_BASE}/bookings`).then((response) => {
+      setBooking(response.data.payload);
     });
-  }, [bookings]);
+  }, []);
 
 
   return (

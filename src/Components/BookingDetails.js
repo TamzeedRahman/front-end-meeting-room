@@ -7,7 +7,7 @@ import { apiURL } from "../util/apiURL";
 const API_BASE = apiURL();
 
 function BookingDetails(props) {
-  const { deleteBooking } = props;
+  const { deleteBooking} = props;
   const [booking, setBooking] = useState([]);
 
   let { id } = useParams();
@@ -17,13 +17,12 @@ function BookingDetails(props) {
     axios
       .get(`${API_BASE}/bookings/${id}`)
       .then((response) => {
-        const { data } = response;
-        setBooking(data);
+        setBooking(response.data.payload);
       })
       .catch((e) => {
         history.push("/not-found");
       });
-  }, [id, history]);
+  }, []);
 
   const handleDelete = () => {
     deleteBooking(id);
@@ -36,17 +35,19 @@ function BookingDetails(props) {
         <thead>
           <tr>
           
-            <th scope="col">Booking Name</th>
-            <th scope="col">Floor</th>
-            <th scope="col">Capacity</th>
+            <th scope="col">Meeting Name</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Attendees</th>
             
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">{booking.name}</th>
-            <td>{booking.floor}</td>
-            <td>{booking.capacity}</td>
+            <th scope="row">{booking.meeting_name}</th>
+            <td>{booking.time_start}</td>
+            <td>{booking.time_end}</td>
+            <td>{booking.attendees}</td>
           </tr>
         </tbody>
       </table>

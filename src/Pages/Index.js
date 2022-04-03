@@ -8,14 +8,14 @@ import { useState, useEffect } from "react";
 const API_BASE = apiURL();
 
 function Index() {
-  const [rooms, setRoom] = useState("");
+  const [rooms, setRoom] = useState([]);
 
   useEffect(() => {
+    
     axios.get(`${API_BASE}/meetingRooms`).then((response) => {
-      const { data } = response;
-      setRoom(String(data.room));
+      setRoom(response.data.payload);
     });
-  }, [rooms]);
+  }, []);
 
   
 
@@ -24,7 +24,7 @@ function Index() {
       <div className="row mt-3">
         <div className="row mt-3">
           <div className="col-sm">
-            <Rooms rooms={rooms} />
+            <Rooms meetingRooms={rooms} />
           </div>
         </div>
       </div>

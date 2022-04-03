@@ -2,12 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useParams, useHistory, withRouter } from "react-router-dom";
 import axios from "axios";
+
 import { apiURL } from "../util/apiURL";
 
 const API_BASE = apiURL();
 
 function RoomDetails(props) {
-  const { deleteRoom } = props;
+  const { deleteMeetingRoom } = props;
   const [room, setRoom] = useState([]);
 
   let { id } = useParams();
@@ -17,14 +18,17 @@ function RoomDetails(props) {
     axios
       .get(`${API_BASE}/meetingRooms/${id}`)
       .then((response) => {
-        const { data } = response;
-        setRoom(data);
+        setRoom(response.data.payload);
       })
       .catch((e) => {
         history.push("/not-found");
       });
   }, [id, history]);
 
+  const handleDelete = () => {
+    deleteMeetingRoom(id);
+    history.push("/meetingRooms");
+  };
 
   return (
     <div>
@@ -40,12 +44,16 @@ function RoomDetails(props) {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">{room.name}</th>
-            <td>{room.floor}</td>
+            <th scope="row">{room.room_name}</th>
+            <td>{room.building_level}</td>
             <td>{room.capacity}</td>
           </tr>
         </tbody>
       </table>
+
+    
+
+
       <hr />
       <div className="showNavigation">
         <div>
@@ -58,6 +66,13 @@ function RoomDetails(props) {
             </div>
           </div>
         </div>
+        <div className="row mt-3">
+            <div className="col-sm">
+              <button onClick={handleDelete} className="btn btn-primary">
+                Delete
+              </button>
+            </div>
+          </div>
       </div>
     </div>
   );

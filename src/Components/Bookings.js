@@ -16,10 +16,9 @@ export default function Bookings({ bookings }) {
             </tr>
           </thead>
           <tbody>
-            {bookings &&
-              bookings.map((booking, id) => {
+              {bookings && bookings.map((booking) => {
                 return (
-                  <Booking key={uuid()} booking={booking} id={id} />
+                  <Booking key={uuid()} booking={booking} />
                 );
               })}
           </tbody>

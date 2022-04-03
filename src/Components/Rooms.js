@@ -15,10 +15,10 @@ export default function Rooms({ meetingRooms }) {
             </tr>
           </thead>
           <tbody>
-            {meetingRooms &&
-              meetingRooms.map((room, id) => {
+            {
+              meetingRooms.map((room) => {
                 return (
-                  <Room key={uuid()} meetingRooms={meetingRooms} id={id} />
+                  <Room key={uuid()} meetingRoom={room} />
                 );
               })}
           </tbody>

@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 function BookingNewForm(props) {
+  let history = useHistory()
   const [booking, setBooking] = useState({
-    bookingName: "",
-    start: "",
-    end: "",
+    meeting_name: "",
+    time_start: "",
+    time_end: "",
     attendees: "",
   });
 
@@ -25,10 +26,10 @@ function BookingNewForm(props) {
       <form onSubmit={handleSubmit}>
         <div className="row">
         <div className="col-md col-lg-3">
-            <label htmlFor="bookingName">Meeting Name:</label>
+            <label htmlFor="meeting_name">Meeting Name:</label>
             <input
-              id="name"
-              value={booking.bookingName}
+              id="meeting_name"
+              value={booking.meeting_name}
               type="text"
               className="form-control"
               onChange={handleTextChange}
@@ -36,10 +37,10 @@ function BookingNewForm(props) {
             />
           </div>  
           <div className="col-sm col-lg-3">
-            <label htmlFor="start">Start:</label>
+            <label htmlFor="time_start">Start:</label>
             <input
-              id="start"
-              value={booking.start}
+              id="time_start"
+              value={booking.time_start}
               type="text"
               className="form-control"
               onChange={handleTextChange}
@@ -47,12 +48,12 @@ function BookingNewForm(props) {
             />
           </div>
           <div className="col-sm col-lg-3">
-            <label htmlFor="end">End:</label>
+            <label htmlFor="time_end">End:</label>
             <input
-              id="end"
+              id="time_end"
               type="text"
               className="form-control"
-              value={booking.end}
+              value={booking.time_end}
               onChange={handleTextChange}
               required
             />
