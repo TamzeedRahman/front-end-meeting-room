@@ -45,7 +45,8 @@ const handleCancel = () => {
             <input
               id="building_level"
               value={room.building_level}
-              type="text"
+              type="number"
+              min="0"
               className="form-control"
               onChange={handleTextChange}
               required
@@ -55,7 +56,8 @@ const handleCancel = () => {
             <label htmlFor="capacity">Capacity:</label>
             <input
               id="capacity"
-              type="text"
+              type="number"
+              min="0"
               className="form-control"
               value={room.capacity}
               onChange={handleTextChange}
