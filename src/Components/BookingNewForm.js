@@ -1,9 +1,13 @@
+
+
 import React from "react";
 import { useState } from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
+
 
 function BookingNewForm(props) {
-  let history = useHistory()
+
   const [booking, setBooking] = useState({
     meeting_room_id: "",
     meeting_name: "",
@@ -11,6 +15,10 @@ function BookingNewForm(props) {
     time_end: "",
     attendees: "",
   });
+
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const handleTextChange = (event) => {
     setBooking({ ...booking, [event.target.id]: event.target.value });
@@ -36,29 +44,43 @@ function BookingNewForm(props) {
               onChange={handleTextChange}
               required
             />
-          </div>  
+          </div> 
+          
+  
           <div className="col-sm col-lg-3">
             <label htmlFor="time_start">Start:</label>
+
+
+        
             <input
               id="time_start"
-              value={booking.time_start}
-              type="text"
+              type="datetime-local"
               className="form-control"
-              onChange={handleTextChange}
+              value={startDate}
+              onChange={(event) => {
+                setStartDate(event.target.value);
+                setBooking({ ...booking, time_start: event.target.value });
+              }}
               required
             />
+       
           </div>
           <div className="col-sm col-lg-3">
             <label htmlFor="time_end">End:</label>
-            <input
+            <input 
+        
               id="time_end"
-              type="text"
+              type="datetime-local"
+              dateFormat="MM/dd/yyyy h:mm a"
               className="form-control"
-              value={booking.time_end}
-              onChange={handleTextChange}
+              value={endDate}
+              onChange={  (event) => {  setEndDate(event.target.value);
+                setBooking({ ...booking, time_end: event.target.value });
+              }}
               required
             />
           </div>
+         
           <div className="col-sm col-lg-3">
             <label htmlFor="attendees">Attendees:</label>
             <input
