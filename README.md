@@ -1,6 +1,9 @@
 # front-end-meeting-room
-deployed link 
+deployed live app 
 https://astonishing-lolly-b64196.netlify.app
+
+# back-end github repo
+https://github.com/TamzeedRahman/Meeting-room-api
 
 # Meeting Room Booking System
 ## Full Stack Booking App
